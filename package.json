@@ -2,7 +2,7 @@
   "name": "tindervip",
   "version": "1.0.0",
   "description": "",
-  "main": "ndex.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },

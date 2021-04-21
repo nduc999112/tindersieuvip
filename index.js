@@ -2,7 +2,6 @@ var express=require('express');
 var handlbars=require('express-handlebars');
 const path=require('path');
 const bodyParser=require('body-parser');
-// const mongoose=require('mongoose');
 const userModel=require('./model/user');
 const multer=require('multer');
 var storage=multer.diskStorage({
@@ -33,13 +32,9 @@ app.engine('.handlebars',handlbars());
 app.set('view engine','.handlebars');
 app.set('views',path.join(__dirname,'src/resources/views/'));
 
-
-
-
 app.get('/',function (req,res){
 res.render('home');
 })
-
 
 app.get('/getuser',async (req,res)=>{
     var baseJSON={
@@ -132,13 +127,7 @@ app.post('/userdetail',(req,res)=>{
         }
     })
 })
-// app.get('/list', (req,res)=>{
-//     userModel.find({}).then(userlist => {
-//         res.render('listuser',{
-//             ups:userlist.map(user=>user.toJSON())
-//         });
-//     })
-// });
+
 //tim theo id
 app.get('/:id',(req,res)=>{
     userModel.findById(req.params.id,(err,user)=>{

@@ -92,7 +92,7 @@ app.post('/add',upload,async (req,res)=>{
                name: req.body.name,
                email: req.body.email,
                number_phone: req.body.number_phone,
-                
+                images:  req.file.filename,
            })
        }})
             .then(data=>{

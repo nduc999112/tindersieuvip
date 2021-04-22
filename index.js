@@ -74,7 +74,37 @@ app.get('/userdetail',function (req,res){
                     });
                 })
 })
-//add reac native
+
+app.post('/add',upload,async (req,res)=>{
+    var username=req.body.username;
+    userModel.findOne({
+        username:username
+    }).then(data=>{
+       if(data){
+           res.render('signup',{title:'user đã tồn tại'})
+       }
+       else {
+           const file=req.file;
+           const u=new userModel(req.body)
+           userModel.create({
+               username: req.body.username,
+               password: req.body.password,
+               name: req.body.name,
+               email: req.body.email,
+               number_phone: req.body.number_phone,
+                
+           })
+       }})
+            .then(data=>{
+                    res.render('signup',{title:"Tạo tài khoản thành công Bấm vào đây để đăng nhâp"});
+                        // res.json('Tạo tài khoản thành công')
+
+                    })
+                    .catch(err=>{
+                        res.status(500).json('Tạo tài khoản thất bại');
+console.log(err)
+                    })
+})
 //add reac native
 app.post('/add1',async (req,res)=>{
     var username=req.body.username;
@@ -140,7 +170,7 @@ app.get('/:id',(req,res)=>{
     })
 })
     //edit user
-app.post('/edit',(req,res,next)=>{
+app.post('/edit',upload,(req,res,next)=>{
 
     userModel.findOneAndUpdate({_id:req.body.id},req.body,{new:true},(err,doc)=>{
         if(!err){
